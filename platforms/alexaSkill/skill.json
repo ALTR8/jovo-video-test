@@ -1,0 +1,30 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Jovo-Video-Test"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sslCertificateType": "Wildcard",
+          "uri": "https://webhook.jovo.cloud/e5fabd18-7258-4841-822c-283e1617ea55"
+        },
+        "interfaces": [
+          {
+            "type": "RENDER_TEMPLATE"
+          },
+          {
+            "type": "VIDEO_APP"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "alex jovo",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.MoreIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateSettingsIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PageUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollDownIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollLeftIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollRightIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ScrollUpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "sure",
+            "ya",
+            "yup",
+            "yes"
+          ]
+        },
+        {
+          "name": "helloWorld",
+          "samples": [
+            "Hello world"
+          ]
+        },
+        {
+          "name": "MyNameIsIntent",
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.US_FIRST_NAME"
+            }
+          ],
+          "samples": [
+            "my name is",
+            "{name}",
+            "I am {name}"
+          ]
+        },
+        {
+          "name": "ShowVideoIntent",
+          "samples": [
+            "show me a video",
+            "video",
+            "show video"
+          ]
+        }
+      ]
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "MyNameIsIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent-MyNameIsIntent"
+          },
+          "slots": [
+            {
+              "name": "name",
+              "type": "AMAZON.US_FIRST_NAME",
+              "elicitationRequired": false,
+              "confirmationRequired": false
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Confirm.Intent-MyNameIsIntent",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Please tell me your first name"
+          },
+          {
+            "type": "PlainText",
+            "value": "What is your name"
+          }
+        ]
+      }
+    ]
+  }
+}
