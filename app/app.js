@@ -16,6 +16,8 @@ const app = new App(config);
 // =================================================================================
 // App Logic
 // =================================================================================
+const videos = ('../platforms/alexaSkill/data/videos.js')
+
 app.setHandler({
     'LAUNCH': function() {
         !this.user().data.name ? this.toIntent('NewUser') : this.toIntent('MyNameIsIntent');
@@ -31,7 +33,47 @@ app.setHandler({
     },
 
     "AMAZON.YesIntent": function() {
-        this.toIntent('ShowVideoIntent')
+        let listTemplate1 = this.alexaSkill().templateBuilder('ListTemplate1');
+        listTemplate1
+            .setTitle('Videos Eventually')
+            .setToken('token')
+            .addItem(
+                videos[0].token,
+                {
+                    description: 'Video1',
+                    url: 'https://s3.amazonaws.com/vm.com-2017/wp-content/uploads/2018/02/01224621/IMG_2304-768x576.jpg',
+                },
+                'text',
+                'and more text',
+                'grrrrrr text'
+            ).addItem(
+            videos[1].token,
+            null,
+            'primary text',
+            'secondary text',
+            'tertiary text'
+        ).addItem(
+            videos[2].token,
+            {
+                description: 'Description',
+                url: 'https://s3.amazonaws.com/vm.com-2017/wp-content/uploads/2017/10/02161008/Daily-Digital-Deep-Dive-Logo_Main-Logo-Black-1-120x43.png',
+            },
+            'primary text',
+            'secondary text',
+            'tertiary text'
+        ).addItem(
+            videos[2].token,
+            {
+                description: 'Description',
+                url: 'https://via.placeholder.com/1200x1000/ffffff/ff0000',
+            },
+            'primary text',
+            'secondary text',
+            'tertiary text'
+        );
+        this.alexaSkill().showDisplayTemplate(listTemplate1);
+        this.ask('look! It is a list! Which would you like to choose?')
+        console.log(this.request);
     },
 
     "AMAZON.NoIntent": function() {
