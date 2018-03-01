@@ -93,11 +93,36 @@
           ]
         },
         {
-          "name": "ShowVideoIntent",
+          "name": "showList",
           "samples": [
+            "show another video",
+            "show a video",
             "show me a video",
-            "video",
-            "show video"
+            "video"
+          ]
+        },
+        {
+          "name": "ShowVideoIntent",
+          "slots": [
+            {
+              "name": "token",
+              "type": "AMAZON.NUMBER",
+              "samples": [
+                "{token}",
+                "video {token}",
+                "number {token}"
+              ]
+            }
+          ],
+          "samples": [
+            "one",
+            "two",
+            "three",
+            "four",
+            "video one",
+            "video two",
+            "video three",
+            "video four"
           ]
         }
       ]
@@ -118,6 +143,24 @@
               "confirmationRequired": false
             }
           ]
+        },
+        {
+          "name": "ShowVideoIntent",
+          "confirmationRequired": true,
+          "prompts": {
+            "confirmation": "Confirm.Intent-ShowVideoIntent"
+          },
+          "slots": [
+            {
+              "name": "token",
+              "type": "AMAZON.NUMBER",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Intent-ShowVideoIntent.IntentSlot-token"
+              }
+            }
+          ]
         }
       ]
     },
@@ -132,6 +175,24 @@
           {
             "type": "PlainText",
             "value": "What is your name"
+          }
+        ]
+      },
+      {
+        "id": "Confirm.Intent-ShowVideoIntent",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Please choose one, two, three, or four"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Intent-ShowVideoIntent.IntentSlot-token",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "please choose one, two, three, or four"
           }
         ]
       }

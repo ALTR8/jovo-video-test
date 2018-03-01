@@ -15,6 +15,24 @@
 							"value": "What is your name"
 						}
 					]
+				},
+				{
+					"id": "Confirm.Intent-ShowVideoIntent",
+					"variations": [
+						{
+							"type": "PlainText",
+							"value": "Please choose one, two, three, or four"
+						}
+					]
+				},
+				{
+					"id": "Elicit.Intent-ShowVideoIntent.IntentSlot-token",
+					"variations": [
+						{
+							"type": "PlainText",
+							"value": "please choose one, two, three, or four"
+						}
+					]
 				}
 			],
 			"dialog": {
@@ -31,6 +49,24 @@
 								"type": "AMAZON.US_FIRST_NAME",
 								"elicitationRequired": false,
 								"confirmationRequired": false
+							}
+						]
+					},
+					{
+						"name": "ShowVideoIntent",
+						"confirmationRequired": true,
+						"prompts": {
+							"confirmation": "Confirm.Intent-ShowVideoIntent"
+						},
+						"slots": [
+							{
+								"name": "token",
+								"type": "AMAZON.NUMBER",
+								"elicitationRequired": true,
+								"confirmationRequired": false,
+								"prompts": {
+									"elicitation": "Elicit.Intent-ShowVideoIntent.IntentSlot-token"
+								}
 							}
 						]
 					}
@@ -135,11 +171,33 @@
 			]
 		},
 		{
+			"name": "showList",
+			"phrases": [
+				"show another video",
+				"show a video",
+				"show me a video",
+				"video"
+			]
+		},
+		{
 			"name": "ShowVideoIntent",
 			"phrases": [
-				"show me a video",
-				"video",
-				"show video"
+				"one",
+				"two",
+				"three",
+				"four",
+				"video one",
+				"video two",
+				"video three",
+				"video four"
+			],
+			"inputs": [
+				{
+					"name": "token",
+					"type": {
+						"alexa": "AMAZON.NUMBER"
+					}
+				}
 			]
 		}
 	]

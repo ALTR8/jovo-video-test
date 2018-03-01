@@ -13,12 +13,13 @@ const config = {
 const app = new App(config);
 const video = require('../data/videos.js');
 
+app.enableRequestLogging();
+
 // =================================================================================
 // App Logic
 // =================================================================================
 app.setHandler({
     'LAUNCH': function() {
-        console.log(video);
         !this.user().data.name ? this.toIntent('NewUser') : this.toIntent('MyNameIsIntent');
     },
 
@@ -32,6 +33,12 @@ app.setHandler({
     },
 
     "AMAZON.YesIntent": function() {
+        this.toIntent('showList')
+    },
+
+    //do I need a slot for token? separate functions for each?
+
+    'showList': function() {
         let listTemplate1 = this.alexaSkill().templateBuilder('ListTemplate1');
         listTemplate1
             .setTitle('Videos Eventually')
@@ -71,15 +78,27 @@ app.setHandler({
             'tertiary text'
         );
         this.alexaSkill().showDisplayTemplate(listTemplate1);
-        this.ask('look! It is a list! Which would you like to choose?')
+        this.tell('look! It is a list full of things! Which would you like to choose?')
+    },
+
+    'ON_ELEMENT_SELECTED': {
+        'video1': function() {
+            console.log('selecting stuff');
+            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+        },
+        'video2': function() {
+            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+        },
+        'video3': function() {
+            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+        },
+        'video4': function() {
+            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+        }
     },
 
     "AMAZON.NoIntent": function() {
         this.toIntent('End')
-    },
-
-    'ShowVideoIntent': function() {
-        this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
     },
 
     'Unhandled': function() {
