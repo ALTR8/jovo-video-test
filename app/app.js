@@ -17,10 +17,12 @@ app.enableRequestLogging();
 
 // =================================================================================
 // App Logic
-// =================================================================================
+// ================================================================================
+
 app.setHandler({
     'LAUNCH': function() {
         !this.user().data.name ? this.toIntent('NewUser') : this.toIntent('MyNameIsIntent');
+        // console.log(listBuilder());
     },
 
     'NewUser': function() {
@@ -36,64 +38,71 @@ app.setHandler({
         this.toIntent('showList')
     },
 
-    //do I need a slot for token? separate functions for each?
-
     'showList': function() {
         let listTemplate1 = this.alexaSkill().templateBuilder('ListTemplate1');
         listTemplate1
-            .setTitle('Videos Eventually')
+            .setTitle('Gary Videos')
             .setToken('token')
             .addItem(
                 video[0].token,
                 {
-                    description: 'Video1',
-                    url: 'https://s3.amazonaws.com/vm.com-2017/wp-content/uploads/2018/02/01224621/IMG_2304-768x576.jpg',
+                    description: video[0].description,
+                    url: video[0].url,
                 },
-                'text',
-                'and more text',
-                'grrrrrr text'
+                video[0].primaryText,
+                video[0].secondaryText,
+                video[0].tertiaryText
             ).addItem(
-            video[1].token,
-            null,
-            'primary text',
-            'secondary text',
-            'tertiary text'
+                video[1].token,
+                {
+                    description: video[1].description,
+                    url: video[1].url,
+                },
+                video[1].primaryText,
+                video[1].secondaryText,
+                video[1].tertiaryText
         ).addItem(
             video[2].token,
             {
-                description: 'Description',
-                url: 'https://s3.amazonaws.com/vm.com-2017/wp-content/uploads/2017/10/02161008/Daily-Digital-Deep-Dive-Logo_Main-Logo-Black-1-120x43.png',
+                description: video[2].description,
+                url: video[2].url,
             },
-            'primary text',
-            'secondary text',
-            'tertiary text'
+            video[2].primaryText,
+            video[2].secondaryText,
+            video[2].tertiaryText
         ).addItem(
             video[3].token,
             {
-                description: 'Description',
-                url: 'https://via.placeholder.com/1200x1000/ffffff/ff0000',
+                description: video[3].description,
+                url: video[3].url,
             },
-            'primary text',
-            'secondary text',
-            'tertiary text'
+            video[3].primaryText,
+            video[3].secondaryText,
+            video[3].tertiaryText
         );
         this.alexaSkill().showDisplayTemplate(listTemplate1);
-        this.tell('look! It is a list full of things! Which would you like to choose?')
+        this.ask('look! It is a list full of things! Which would you like to choose?')
+    },
+
+    'ShowVideoIntent': function(token) {
+        console.log(token.value);
+        let videoIndex = (token.value) -1
+        console.log(videoIndex);
+        this.alexaSkill().showVideo(video[videoIndex].videoLink);
     },
 
     'ON_ELEMENT_SELECTED': {
         'video1': function() {
-            console.log('selecting stuff');
-            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+            this.alexaSkill().showVideo(video[0].videoLink);
         },
         'video2': function() {
-            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+            this.alexaSkill().showVideo(video[1].videoLink);
         },
         'video3': function() {
-            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+            this.alexaSkill().showVideo(video[2].videoLink);
         },
         'video4': function() {
-            this.alexaSkill().showVideo('https://s3.amazonaws.com/alexa-flash-gary/videos/It\'s%20all%20persepective_export2.mp4', 'Title', 'subtitle');
+            this.alexaSkill().showVideo(video[3].videoLink);
         }
     },
 

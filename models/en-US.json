@@ -21,7 +21,7 @@
 					"variations": [
 						{
 							"type": "PlainText",
-							"value": "Please choose one, two, three, or four"
+							"value": "Please choose a video by it's corresponding number"
 						}
 					]
 				},
@@ -182,14 +182,8 @@
 		{
 			"name": "ShowVideoIntent",
 			"phrases": [
-				"one",
-				"two",
-				"three",
-				"four",
-				"video one",
-				"video two",
-				"video three",
-				"video four"
+				"video {token}",
+				"{token}"
 			],
 			"inputs": [
 				{
